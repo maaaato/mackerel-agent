@@ -108,6 +108,7 @@ type Config struct {
 	Filesystems   Filesystems   `toml:"filesystems"`
 	HTTPProxy     string        `toml:"http_proxy"`
 	CloudPlatform CloudPlatform `toml:"cloud_platform"`
+	OnStart       string
 
 	// This Plugin field is used to decode the toml file. After reading the
 	// configuration from file, this field is set to nil.

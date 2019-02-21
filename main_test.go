@@ -30,7 +30,7 @@ diagnostic=false
 	confFile.Sync()
 	confFile.Close()
 	defer os.Remove(confFile.Name())
-	mergedConfig, _ := resolveConfig(&flag.FlagSet{}, []string{"-conf=" + confFile.Name(), "-role=My-Service:default,INVALID#SERVICE", "-verbose", "-diagnostic"})
+	mergedConfig, _ := resolveConfig(&flag.FlagSet{}, []string{"-conf=" + confFile.Name(), "-role=My-Service:default,INVALID#SERVICE", "-verbose", "-diagnostic", "working"})
 
 	t.Logf("      apibase: %v", mergedConfig.Apibase)
 	t.Logf("       apikey: %v", mergedConfig.Apikey)
@@ -39,6 +39,7 @@ diagnostic=false
 	t.Logf("   diagnostic: %v", mergedConfig.Diagnostic)
 	t.Logf("roleFullnames: %v", mergedConfig.Roles)
 	t.Logf("      verbose: %v", mergedConfig.Verbose)
+	t.Logf("      onstart: %v", mergedConfig.OnStart)
 
 	if mergedConfig.Root != "/hoge/fuga" {
 		t.Errorf("Root(confing from file) should be /hoge/fuga but: %v", mergedConfig.Root)
@@ -110,6 +111,7 @@ func TestResolveConfigForRetire(t *testing.T) {
 		"-diagnostic",
 		"-apikey=hogege",
 		"-role=hoge:fuga",
+		"-onstart=hoge",
 	}
 
 	conf, force, _ := resolveConfigForRetire(&flag.FlagSet{}, argv)

@@ -92,6 +92,7 @@ func resolveConfig(fs *flag.FlagSet, argv []string) (*config.Config, error) {
 		diagnostic    = fs.Bool("diagnostic", false, "Enables diagnostic features")
 		child         = fs.Bool("child", false, "(internal use) child process of the supervise mode")
 		verbose       bool
+		onstart       = fs.String("onstart", "", "aaaaaaaaaaaaaaaaaaa")
 		roleFullnames roleFullnamesFlag
 	)
 	fs.BoolVar(&verbose, "verbose", config.DefaultConfig.Verbose, "Toggle verbosity")
@@ -126,6 +127,8 @@ func resolveConfig(fs *flag.FlagSet, argv []string) (*config.Config, error) {
 			conf.Verbose = verbose
 		case "role":
 			conf.Roles = roleFullnames
+		case "on_start":
+			conf.Onstart = onStart
 		}
 	})
 	if *child {
